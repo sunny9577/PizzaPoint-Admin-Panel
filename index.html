@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="./">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="author" content="Łukasz Holeczek">
+    <title>PizzaPoint Admin Panel</title>
+    <link href="content/img/favicon.ico" rel="icon">
+    <!-- Icons-->
+    <link href="content/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="content/vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <script src="app/lib/angular.min.js"></script>
+    <script src="app/lib/angular-route.min.js"></script>
+    <script src="app/app.js"></script>
+
+    <link href="content/css/style.css" rel="stylesheet">
+    <link href="content/vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+  </head>
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show" ng-app="myApp">
+    <header class="app-header navbar">
+      <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img class="navbar-brand-full " src="content/img/brand/pp.png" width="200" alt="Logo">
+        <img class="navbar-brand-minimized" src="content/img/brand/ppl.png" width="30" height="30" alt="Logo">
+      </a>
+      <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="nav navbar-nav d-md-down-none">
+        <li class="nav-item px-3">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link" href="#">Settings</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav ml-auto">
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <img class="img-avatar" src="content/img/avatars/4.jpg">
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-header text-center">
+              <strong>Account</strong>
+            </div>
+            <a class="dropdown-item" href="#!/password">
+              <i class="fa fa-bell-o"></i> Change Password
+            </a>  
+            <div class="dropdown-header text-center">
+              <strong>Settings</strong>
+            </div>
+            <a class="dropdown-item" href="#!/logout">
+              <i class="fa fa-lock"></i> Logout</a>
+          </div>
+        </li>
+      </ul>
+    </header>
+    <div class="app-body">
+      <div class="sidebar">
+        <nav class="sidebar-nav">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#!/">
+                <i class="nav-icon icon-speedometer"></i> Dashboard
+              </a>
+            </li>
+            <li class="nav-item nav-dropdown open">
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-cursor"></i> Orders</a>
+              <ul class="nav-dropdown-items">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#!/allorders">
+                        <i class="nav-icon icon-cursor"></i> All Orders</a>
+                    </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/pending">
+                    <i class="nav-icon icon-cursor"></i> Pending</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/shipped">
+                    <i class="nav-icon icon-cursor"></i> Shipped</a>
+                </li>
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/canceled">
+                    <i class="nav-icon icon-cursor"></i> Canceled</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/delivered">
+                    <i class="nav-icon icon-cursor"></i> Delivered</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown open">
+              <a class="nav-link nav-dropdown-toggle" href="#" style="">
+                <i class="nav-icon icon-cursor"></i> Inventory</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/products">
+                    <i class="nav-icon icon-cursor"></i> Items</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/newitem">
+                    <i class="nav-icon icon-cursor"></i> Add new Item</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown open"> 
+              <a class="nav-link nav-dropdown-toggle" href="#">
+                <i class="nav-icon icon-cursor"></i> Promo/Vouchers</a>
+              <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/promo">
+                    <i class="nav-icon icon-cursor"></i> Promo Codes</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/vouchers">
+                    <i class="nav-icon icon-cursor"></i> Gift Vouchers</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#!/banners">
+                    <i class="nav-icon icon-cursor"></i> Banners</a>
+                </li>
+              </ul>
+            </li>
+        </nav>
+        <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+      </div>
+      <main class="main" ng-view >
+
+      </main>
+
+    </div>
+    <footer class="app-footer">
+      <div>
+        <span>&copy; 2018 PizzaPoint</span>
+      </div>
+      <div class="ml-auto">
+        <span>Powered by</span>
+        <a href="#">CoreUI</a>
+      </div>
+    </footer>
+    <script src="content/vendors/jquery/js/jquery.min.js"></script>
+    <script src="content/vendors/popper.js/js/popper.min.js"></script>
+    <script src="content/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="content/vendors/pace-progress/js/pace.min.js"></script>
+    <script src="content/vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="content/vendors/@coreui/coreui/js/coreui.min.js"></script>
+    <script src="content/vendors/@coreui/coreui-plugin-chartjs-custom-tooltips/js/custom-tooltips.min.js"></script>
+    <script src="content/js/main.js"></script>
+  </body>
+</html>

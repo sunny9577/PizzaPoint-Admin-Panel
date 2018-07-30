@@ -1,0 +1,117 @@
+<style>
+    td {
+    cursor: pointer;
+    }
+    tbody>tr:hover{
+    background-color: rgba(0,0,0,0.2);
+    }
+  </style>
+  <div class="card">
+      <div class="card-body">
+          <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal" style="float: left;">New</button>
+          <input type="text" class="form-control " placeholder="Search any field" ng-model="searchword" style="width: 95%;float: right">
+        </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-responsive-sm">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Image URL</th>
+            <th>Click URL</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="x in banners | filter:searchword" >
+            <td>{{ x.banner_id }}</td>
+            <td>{{ x.banner_title }}</td>
+            <td>{{ x.banner_img_url }}</td>
+            <td>{{ x.banner_target_url }}</td>
+            <td>{{ !x.active ? "ACTIVE" :"DEACTIVATED" }}</td>
+            <td>
+              <div>
+                <button ng-show="{{x.active=='0'}}" ng-click="deactivate(x.banner_id)" class="btn btn-danger">Deactivate</button>
+                <button ng-hide="{{x.active=='0'}}" ng-click="activate(x.banner_id)" class="btn btn-success">Activate</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#">Prev</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">New Banner</h4>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-body card-block">
+                  <form id="mainform" class="form-horizontal">
+
+                    <div class="row form-group">
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Banner Title</label></div>
+                      <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="title" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                    </div>
+
+                    <div class="row form-group">
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Image URL</label></div>
+                      <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="imgurl" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                    </div>
+                    <div class="row form-group">
+                      <div class="col col-md-3"><label for="text-input" class=" form-control-label">Click URL</label></div>
+                      <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="desurl" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm"  ng-click="submit()"  data-dismiss="modal" >
+                          <i class="fa fa-dot-circle-o"></i> Add
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                          <i class="fa fa-ban"></i> Reset
+                        </button>
+                      </div>
+                  
+                </form>
+              </div>
+                
+                
+              </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary" type="button">Save changes</button>
+        </div> -->
+      </div>
+      <!-- /.modal-content-->
+    </div>
+    <!-- /.modal-dialog-->
+  </div>

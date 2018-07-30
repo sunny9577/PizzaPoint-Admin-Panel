@@ -1,0 +1,77 @@
+    <style>
+    td {
+    cursor: pointer;
+    }
+    tbody>tr:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+    .action:hover{
+      transition-duration: 3000ms;
+    }
+    .card {
+      margin-top: 0px;
+      margin-bottom:0px;
+    }
+</style>
+  <div class="card">
+    <div class="card-body">
+            <input type="text" class="form-control input-lg " placeholder="Search any field" ng-model="searchword">
+      </div>
+    </div>
+    <div class="card" ng-init="showbtn=true">
+      <div class="card-body">
+        <table class="table table-responsive-sm">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>ID</th>
+              <th>To</th>
+              <th>Product</th>
+              <th>Date</th>
+              <th>Payment</th>
+              <th>Address</th>
+              <th ng-hide="{{status==='All'}}">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="x in orders | filter:searchword">
+              <td ng-show="x.status">{{ x.status }}</td>
+              <td ng-hide="x.status">{{ status }}</td>
+              <td>{{ x.order_id }}</td>
+              <td>{{ x.cust_fname +" "+ x.cust_lname }}</td>
+              <td>{{ x.product_title }}</td>
+              <td>{{ x.order_date.substr(0,10) }}</td>
+              <td>{{ x.payment_method }}</td>
+              <td>{{ x.address_line_1 + x.address_line_2 }}</td>
+              <td class ="action" ng-hide="{{status==='All'}}" ng-mouseenter="showbtn=true" ng-mouseleave="showbtn=true">
+                <button ng-show="shipped" class="btn btn-info" ng-click="shipped(x.order_id)" style="color:white"><span ng-show="showbtn">Shipped</span></button>
+                <button ng-show="pending" class="btn btn-warning" ng-click="pending(x.order_id)" style="color:white"><span ng-show="showbtn">Pending</span></button>
+                <button ng-show="cancel" class="btn btn-danger" ng-click="cancel(x.order_id)" style="color:white"><span ng-show="showbtn">Cancel</span></button>
+                <button ng-show="delivered" class="btn btn-success" ng-click="delivered(x.order_id)" style="color:white"><span ng-show="showbtn">Delivered</span></button>
+                <button ng-show="{{status === 'Delivered'}}" class="btn btn-success" ng-click="showInvoice(x.order_id)" style="color:white">Invoice</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#">Prev</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </div>
+    </div>

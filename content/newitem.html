@@ -1,0 +1,94 @@
+<div class="card" style="padding: 10px">
+    <div class="card-header">
+       <strong>Add New Item</strong>
+    </div>
+    <div class="card-body card-block">
+       <form id="mainform" enctype="multipart/form-data" class="form-horizontal">
+          <div class="row form-group">
+             <div class="col col-md-3"><label class=" form-control-label">Product ID</label></div>
+             <div class="col-12 col-md-9">
+                <p class="form-control-static">{{id}}</p>
+             </div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Item Title</label></div>
+             <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="title" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABHklEQVQ4EaVTO26DQBD1ohQWaS2lg9JybZ+AK7hNwx2oIoVf4UPQ0Lj1FdKktevIpel8AKNUkDcWMxpgSaIEaTVv3sx7uztiTdu2s/98DywOw3Dued4Who/M2aIx5lZV1aEsy0+qiwHELyi+Ytl0PQ69SxAxkWIA4RMRTdNsKE59juMcuZd6xIAFeZ6fGCdJ8kY4y7KAuTRNGd7jyEBXsdOPE3a0QGPsniOnnYMO67LgSQN9T41F2QGrQRRFCwyzoIF2qyBuKKbcOgPXdVeY9rMWgNsjf9ccYesJhk3f5dYT1HX9gR0LLQR30TnjkUEcx2uIuS4RnI+aj6sJR0AM8AaumPaM/rRehyWhXqbFAA9kh3/8/NvHxAYGAsZ/il8IalkCLBfNVAAAAABJRU5ErkJggg==&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"><small class="form-text text-muted">This will be displayed in the app</small></div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="textarea-input" class=" form-control-label">Item discription</label></div>
+             <div class="col-12 col-md-9"><textarea ng-model="desc" id="textarea-input" rows="4" placeholder="..." class="form-control"></textarea></div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Resturant Location</label></div>
+             <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="location" placeholder="Dominos India, Mumbai" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"><small class="form-text text-muted">This will be displayed in the app</small></div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="email-input" class=" form-control-label">Contact</label></div>
+             <div class="col-12 col-md-9"><input type="text" id="email-input" ng-model="contact" placeholder="Enter support number" class="form-control"></div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="text-input" class=" form-control-label">Price</label></div>
+             <div class="col-12 col-md-9"><input type="number" id="text-input" ng-model="price" placeholder="299" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"><small class="form-text text-muted">This will be displayed in the app</small></div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="select" class=" form-control-label">Category</label></div>
+             <div class="col-12 col-md-9">
+                <select ng-model="category" id="select" class="form-control">
+                   <option value="pizza" ng-repeat="category in categories">{{category.cat_name}}</option>
+                </select>
+             </div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label for="select" class=" form-control-label">Currency</label></div>
+             <div class="col-12 col-md-9">
+                <select ng-model="currency" id="select" class="form-control">
+                   <option value="INR" selected="">INR</option>
+                   <!-- <option value="USD">USD</option> -->
+                </select>
+             </div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label class=" form-control-label">Veg/Non-veg</label></div>
+             <div class="col col-md-9">
+                <div class="form-check-inline form-check">
+                   <label for="inline-radio1" class="form-check-label ">
+                   <input type="radio" id="inline-radio1" ng-model="veg" value="veg" class="form-check-input">Veg&nbsp;
+                   </label>
+                   <label for="inline-radio2" class="form-check-label ">
+                   <input type="radio" id="inline-radio2" ng-model="veg" value="nonveg" class="form-check-input">Non Veg
+                   </label>
+                </div>
+             </div>
+          </div>
+          <div class="row form-group">
+             <div class="col col-md-3"><label class=" form-control-label">Available channels</label></div>
+             <div class="col col-md-9">
+                <div class="form-check-inline form-check">
+                   <label for="inline-checkbox1" class="form-check-label ">
+                   <input type="checkbox" id="inline-checkbox1" ng-model="home_del" value="home" class="form-check-input">Home Delivery&nbsp;&nbsp;
+                   </label>
+                   <label for="inline-checkbox2" class="form-check-label ">
+                   <input type="checkbox" id="inline-checkbox2" ng-model="pickup" value="pickup" class="form-check-input">Pickup
+                   </label>
+                </div>
+             </div>
+          </div>
+          <!-- <div class="row form-group">
+             <div class="col col-md-3"><label for="file-input" class=" form-control-label">Display picture</label></div>
+             <div class="col-12 col-md-9"><input type="file" id="file-input" ng-model="picture" class="form-control-file"></div>
+          </div> -->
+          <div class="row form-group">
+            <div class="col col-md-3"><label for="text-input" class=" form-control-label">Thumbnail URL</label></div>
+            <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="uri" placeholder="https://cdn.google.com/assets/thumb1.png" class="form-control" ></div>
+         </div>
+    </form></div>
+    <div class="card-footer">
+    <button type="submit" class="btn btn-primary btn-sm" ng-click="submit()">
+    <i class="fa fa-dot-circle-o"></i> Add
+    </button>
+    <button type="reset" class="btn btn-danger btn-sm">
+    <i class="fa fa-ban"></i> Reset
+    </button>
+    </div>
+    
+ </div>

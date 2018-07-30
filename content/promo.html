@@ -1,0 +1,121 @@
+<style>
+    td {
+    cursor: pointer;
+    }
+    tbody>tr:hover{
+      background-color: rgba(0,0,0,0.2);
+    }
+</style>
+<div class="card">
+    <div class="card-body">
+        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal" style="float: left;">New</button>
+        <input type="text" class="form-control " placeholder="Search any field" ng-model="searchword" style="width: 95%;float: right">
+      </div>
+</div>
+<div class="card">
+      <div class="card-body">
+        <table class="table table-responsive-sm">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Code</th>
+              <th>Percentage</th>
+              <th>Value</th>
+              <th>Status</th>   
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="x in promos | filter:searchword" >
+              <td>{{ x.promo_id }}</td>
+              <td>{{ x.promo_code }}</td>
+              <td>{{ x.discount_per }}</td>
+              <td>{{ x.discount_value }}</td>
+              <td>{{ x.status | uppercase}}</td>
+              <td><div>
+                    <button ng-show="{{x.status==='active'}}" ng-click="deactivate(x.promo_id)" class="btn btn-danger">Deactivate</button>
+                    <button ng-hide="{{x.status==='active'}}" ng-click="activate(x.promo_id)" class="btn btn-success">Activate</button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#">Prev</a>
+          </li>
+          <li class="page-item active">
+            <a class="page-link" href="#">1</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">2</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">3</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">4</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-primary" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">New Promo</h4>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body card-block">
+                      <form id="mainform"  class="form-horizontal">
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Promo Code</label></div>
+                          <div class="col-12 col-md-9"><input type="text" id="text-input" ng-model="code" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Code Value</label></div>
+                          <div class="col-12 col-md-9"><input type="number" id="text-input" ng-model="value" placeholder="" class="form-control" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;"></div>
+                        </div>
+              
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label for="select" class=" form-control-label">Type</label></div>
+                          <div class="col-12 col-md-9">
+                            <select ng-model="type" id="select" class="form-control">
+                              <option value="value" selected="">Value</option>
+                              <option value="percentage">Percentage</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm" ng-click="submit()"  data-dismiss="modal" >
+                              <i class="fa fa-dot-circle-o"></i> Add
+                            </button>
+                            <button type="reset" class="btn btn-danger btn-sm">
+                              <i class="fa fa-ban"></i> Reset
+                            </button>
+                          </div>
+                        
+                      
+                    </form></div>
+                    
+                    
+                  </div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="button">Save changes</button>
+            </div> -->
+          </div>
+          <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+      </div>

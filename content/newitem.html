@@ -34,7 +34,7 @@
              <div class="col col-md-3"><label for="select" class=" form-control-label">Category</label></div>
              <div class="col-12 col-md-9">
                 <select ng-model="category" id="select" class="form-control">
-                   <option value="pizza" ng-repeat="category in categories">{{category.cat_name}}</option>
+                   <option value="{{category.cat_name}}" ng-repeat="category in categories">{{category.cat_name}}</option>
                 </select>
              </div>
           </div>

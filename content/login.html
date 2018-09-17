@@ -13,7 +13,7 @@
                       <i class="icon-user"></i>
                     </span>
                   </div>
-                  <input class="form-control" type="text" ng-model="username" placeholder="Email">
+                  <input class="form-control" id="username" type="text" ng-model="username" placeholder="Email" auto-focus>
                 </div>
                 <div class="input-group mb-4">
                   <div class="input-group-prepend">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="row">
                   <div class="col-6">
-                    <button class="btn btn-primary px-4" ng-click="login()" type="button">Login</button>
+                    <button class="btn btn-primary px-4" keyup.enter="login()" ng-click="login()" type="button">Login</button>
                   </div>
                 </div>
               </div>

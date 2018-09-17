@@ -2,6 +2,25 @@ var app = angular.module("myApp", ["ngRoute"]);
 
 const HOST = "http://localhost:8000/";
 
+app.config(['$compileProvider', '$httpProvider', function($compileProvider, $httpProvider) {
+    $compileProvider.debugInfoEnabled(false);
+    $compileProvider.commentDirectivesEnabled(false);
+    $compileProvider.cssClassDirectivesEnabled(false);
+    $httpProvider.interceptors.push('httpRequestInterceptor');
+}]);
+
+app.factory('httpRequestInterceptor', function() {
+    return {
+        request: function(config) {
+
+            config.headers['Authorization'] = 'Basic ' + localStorage.getItem('token');
+            config.headers['Accept'] = 'application/json;odata=verbose';
+
+            return config;
+        }
+    };
+});
+
 app.config(["$routeProvider", function($routeProvider) {
     $routeProvider
         .when("/", {
@@ -58,6 +77,7 @@ app.config(["$routeProvider", function($routeProvider) {
             templateUrl: "content/password.html",
             controller: "passwordController"
         }).when("/logout", {
+            templateUrl: "content/logout.html",
             controller: "logoutController"
         })
         .otherwise({
@@ -66,6 +86,7 @@ app.config(["$routeProvider", function($routeProvider) {
 }]);
 
 app.run(['$rootScope', '$location', 'Auth', function($rootScope, $location, Auth) {
+
     $rootScope.$on('$routeChangeStart', function(event, path) {
 
         $rootScope.nextUrl = path.originalPath;
@@ -96,31 +117,66 @@ app.factory('Auth', function() {
     }
 })
 
-app.controller('loginController', function($rootScope, $http, $scope, Auth, $location) {
-    $scope.login = function() {
-        credentials = {
-            username: $scope.username,
-            password: $scope.password
+app.directive('autoFocus', function($timeout) {
+    return {
+        restrict: 'AC',
+        link: function(_scope, _element) {
+            $timeout(function(){
+                _element[0].focus();
+            }, 0);
         }
+    };
+});
 
-        $http.post(HOST + 'api/login', credentials).then(function(response) {
+app.controller('loginController', function($rootScope, $http, $scope, Auth, $location) {
 
-            if (response.data !== 'error') {
-                user = {
-                    token: response.data
-                }
-                Auth.setUser(user);
+
+        $scope.login = function() {
+
+            credentials = {
+                username: $scope.username,
+                password: $scope.password
+            }
+            $http.post(HOST + "api/login", credentials).then((response) => {
+                localStorage.setItem('token', response.data.token);
+                Auth.setUser({
+                    token: response.data.token
+                });
 
                 if ($rootScope.nextUrl == '/login') {
                     $rootScope.nextUrl = '/';
                 }
 
                 $location.path($rootScope.nextUrl);
-            } else {
+            }).catch((err)=>{
+                console.log(err);
                 alert("Wrong Credientials")
-            }
-        });
-    };
+            });
+
+        };
+
+        var checkLogin = function() {
+
+            mtoken = localStorage.getItem('token');
+            $http.post(HOST + "api/verify", {
+                'token': mtoken
+            }).then((response) => {
+                Auth.setUser({
+                    token: mtoken
+                });
+                
+
+                if ($rootScope.nextUrl == '/login') {
+                    $rootScope.nextUrl = '/';
+                }
+
+                $location.path($rootScope.nextUrl);
+    
+            }, (error) => {
+            })
+        };
+        
+        checkLogin();
 })
 
 app.controller('dashboardController', function($rootScope, $scope, $http) {
@@ -370,6 +426,15 @@ app.controller('invoiceController', function($scope, $http, $routeParams) {
         .then(function(response) {
             $scope.item = response.data;
         });
+});
+
+app.controller('logoutController', function($scope, $location, Auth) {
+
+    $scope.logout = ()=>{
+        localStorage.removeItem('token');
+        Auth.setUser();
+        $location.path('/login');
+    }
 });
 
 app.controller('passwordController', function($scope, $http) {
